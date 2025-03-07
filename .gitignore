@@ -1,3 +1,4 @@
-/visual_data/
+/init_data/
 /data.pkl
-/filt_data_png
+/filt_data
+/reference_wave.npy
