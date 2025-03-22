@@ -1,0 +1,1 @@
+conda env create -f environment.yml  # Создаст окружение с именем из файла
