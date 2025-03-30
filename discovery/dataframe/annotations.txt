@@ -1,19 +1,22 @@
 test_stroop:
     00:00 - 02:00 Meditation
     02:40 - 05:00 Test DIAT-SHIF stems from the classic Stroop test (Stroop, 1935)
+
 test_cold:
     00:00 - 02:00 Meditation
     02:00 - 03:00 Water with ice
+
 test_cold_2:
     00:00 - 02:00 Meditation
     02:00 - 03:00 Ice
-test_reading:
-    00:00 - "the end" Read a sad story in the Internet
+
 test_video_1:
     00:00 - 01:00 Preparing
     01:00 - "the end" Watching bad videos that cause physical harm to a person
+
 test_movie_1:
     01:00 - 01:30 Movie  
+
 test_movie_2
     17:00 - 17:40
     25:00 - 25:35
@@ -21,10 +24,12 @@ test_movie_2
     30:25 - 31:20
     32:40 - 36:00
     39:15 - 48:00
+
 test_physical_activity_1:
     00:00 - 01:00 Walking
     01:30 - 03:30 Running
     03:30 - 06:30 Standing after Running
+
 test_physical_activity_2:
     00:00 - 01:00 Crouch-jumping one minute
     01:00 - 06:00 Relaxing
