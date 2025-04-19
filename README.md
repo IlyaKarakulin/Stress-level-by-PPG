@@ -51,11 +51,6 @@ conda activate ppg-env
 pip install -r requirements.txt
 ```
 
-### Optional Configuration
-- Add PyPI secrets in GitHub Actions for automated releases
-- Configure ReadTheDocs for documentation hosting
-- Enable Dependabot for dependency updates
-
 ## Usage
 
 ### Basic Processing
@@ -89,6 +84,54 @@ from ppg_processing import QualityAnalyzer
 report = QualityAnalyzer().generate_full_report(clean_signal)
 print(f"Signal Quality Index: {report['sqi']}")
 ```
+
+Demo Visualization
+Processing Workflow
+
+    Preprocessing
+
+        Baseline correction
+
+        Signal normalization
+
+    Spectral Analysis
+
+        STFT spectrogram calculation
+
+        Motion artifact detection
+
+    Adaptive Filtering
+
+        Noise segment removal
+
+        Cubic spline interpolation
+
+        Edge smoothing
+
+    Postprocessing
+
+        Final normalization
+
+        Output validation
+
+API Reference
+Core Classes
+Class	Description
+SpectralFilter	Main signal processing engine
+QualityAnalyzer	Signal quality assessment tools
+BatchProcessor	For bulk dataset processing
+Visualizer	Plotting and visualization utilities
+Key Methods
+python
+
+# For single-file processing
+Pipeline.process_file(input_path, output_dir)
+
+# For quality metrics
+QualityAnalyzer.calculate_snr(clean_signal, noise_profile)
+
+# For batch operations
+BatchProcessor.run_job(config_file)
 
 ## Contributing
 
