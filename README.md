@@ -85,53 +85,85 @@ report = QualityAnalyzer().generate_full_report(clean_signal)
 print(f"Signal Quality Index: {report['sqi']}")
 ```
 
-Demo Visualization
-Processing Workflow
+```markdown
+# PPG Signal Processing Toolkit
 
-    Preprocessing
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue?logo=python)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/IlyaKarakulin/stress-level-by-PPG?style=social)](https://github.com/IlyaKarakulin/stress-level-by-PPG/stargazers)
 
-        Baseline correction
+## Demo Visualization 🎨
 
-        Signal normalization
+```python
+from ppg_processing import load_sample, visualize
 
-    Spectral Analysis
+raw, clean = load_sample("demo_dataset")
+visualize(
+    raw_signal=raw,
+    processed_signal=clean,
+    title="Motion Artifact Removal Demo"
+)
+```
 
-        STFT spectrogram calculation
+![Processing Demo](docs/demo_visualization.png)
 
-        Motion artifact detection
+## Processing Workflow ⚙️
 
-    Adaptive Filtering
+### 1. Preprocessing
+- 📉 Baseline correction using moving average
+- 🔢 Signal normalization (z-score)
+- 🎚️ Adaptive amplitude scaling
 
-        Noise segment removal
+### 2. Spectral Analysis
+- 🌌 STFT spectrogram calculation (window size=256)
+- 🎯 Motion artifact detection in 0.5-5Hz band
+- 📊 Noise power ratio estimation
 
-        Cubic spline interpolation
+### 3. Adaptive Filtering
+- ✂️ Noise-dominant segment removal
+- 🧩 Cubic spline interpolation for gaps
+- 🌀 Edge smoothing with Tukey window
 
-        Edge smoothing
+### 4. Postprocessing
+- ✅ Output validation checks
+- 📏 Final amplitude normalization
+- 💾 Result serialization (CSV/PKL/HDF5)
 
-    Postprocessing
+## API Reference 📚
 
-        Final normalization
+### Core Classes
 
-        Output validation
+| Class               | Methods                          | Description                          |
+|---------------------|----------------------------------|--------------------------------------|
+| `SpectralFilter`    | `.process()`, `.configure()`     | Main signal processing engine        |
+| `QualityAnalyzer`   | `.calculate_snr()`, `.get_report()` | Signal quality assessment toolkit  |
+| `BatchProcessor`    | `.run_job()`, `.monitor()`        | Bulk dataset processing              |
+| `Visualizer`        | `.plot_raw()`, `.animate()`      | Interactive visualization tools      |
 
-API Reference
-Core Classes
-Class	Description
-SpectralFilter	Main signal processing engine
-QualityAnalyzer	Signal quality assessment tools
-BatchProcessor	For bulk dataset processing
-Visualizer	Plotting and visualization utilities
-Key Methods
-python
+### Key Methods
 
-# For single-file processing
-Pipeline.process_file(input_path, output_dir)
+```python
+# Process single file
+Pipeline.process_file(
+    input_path: str,
+    output_dir: str = "./processed",
+    config: dict = None
+)
 
-# For quality metrics
-QualityAnalyzer.calculate_snr(clean_signal, noise_profile)
+# Calculate signal-to-noise ratio
+QualityAnalyzer.calculate_snr(
+    clean_signal: np.ndarray,
+    noise_profile: np.ndarray
+) -> float
 
-# For batch operations
-BatchProcessor.run_job(config_file)
+# Run batch processing
+BatchProcessor.run_job(
+    config_file: str,
+    parallel: bool = True,
+    progress_bar: bool = True
+)
+```
+
 
 ## Contributing
 
