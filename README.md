@@ -6,6 +6,16 @@
 
 A Python package for robust Photoplethysmography (PPG) signal processing, specifically designed for wearable device data with motion artifact removal capabilities.
 
+## In this README :point_down:
+
+- [Features](#features)
+- [Usage](#usage)
+  - [Initial setup](#installation)
+  - [Creating releases](#creating-releases)
+- [Projects using this template](#projects-using-this-template)
+- [FAQ](#faq)
+- [Contributing](#contributing)
+
 ## Features
 
 - 🛡️ **Motion Artifact Filtering**  
@@ -19,7 +29,10 @@ A Python package for robust Photoplethysmography (PPG) signal processing, specif
 - ⚡ **Batch Processing**  
   Efficient handling of multiple recordings
 
-## Installation
+
+## Usage
+
+### Installation
 
 ```bash
 # Clone with SSH
