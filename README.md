@@ -7,6 +7,18 @@
 
 A Python package for robust Photoplethysmography (PPG) signal processing with motion artifact removal from wearable devices.
 
+## In this README :point_down:
+
+- [Features](#features)
+- [Installation](#initial-setup)
+- [Usage](#usage)
+  - [Basic-processing](#basic-processing)
+  - [Advanced Features](#advanced-features)
+- [Visualisation](#demo-visualization-)
+- [Processing Workflow](#processing-workflow-️)
+- [API Reference 📚](#api-reference-)
+
+
 ## Features
 
 ⚡ **Automated Processing Pipeline**
@@ -68,7 +80,7 @@ visualize(raw_signal, clean_signal)
 ```
 
 ### Advanced Features
-
+```python
 # Batch processing
 from ppg_processing import BatchProcessor
 
@@ -83,14 +95,7 @@ from ppg_processing import QualityAnalyzer
 
 report = QualityAnalyzer().generate_full_report(clean_signal)
 print(f"Signal Quality Index: {report['sqi']}")
-
-
-```markdown
-# PPG Signal Processing Toolkit
-
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue?logo=python)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/IlyaKarakulin/stress-level-by-PPG?style=social)](https://github.com/IlyaKarakulin/stress-level-by-PPG/stargazers)
+```
 
 ## Demo Visualization 🎨
 
@@ -172,33 +177,6 @@ We welcome contributions through:
 - 🚀 [Feature Requests](https://github.com/IlyaKarakulin/stress-level-by-PPG/issues/new?template=feature_request.md)
 - 📖 Documentation Improvements
 
-**Development workflow:**
-1. Fork the repository
-2. Create feature branch:
-   ```bash
-   git checkout -b feature/your-feature
-   ```
-3. Commit changes:
-   ```bash
-   git commit -m 'Add awesome feature'
-   ```
-4. Push to branch:
-   ```bash
-   git push origin feature/your-feature
-   ```
-5. Open a Pull Request
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
-
-## Documentation
-
-Full API documentation available at:  
-[https://ilyakarakulin.github.io/stress-level-by-PPG/](https://ilyakarakulin.github.io/stress-level-by-PPG/)
-
-Build locally:
-```bash
-make docs && open docs/_build/html/index.html
-```
 
 ## FAQ
 
@@ -225,23 +203,3 @@ Need help? Contact us:
 - 🐦 Twitter: [@PPG_Experts](https://twitter.com/PPG_Experts)
 
 ---
-
-**Developed by Biomedical Signal Processing Team**  
-[![Follow on GitHub](https://img.shields.io/github/followers/IlyaKarakulin?label=Follow%20Ilya&style=social)](https://github.com/IlyaKarakulin)
-```
-
-Key improvements from template:
-1. Unified CI/CD and quality control badges
-2. Conda environment setup instructions
-3. Expanded FAQ section
-4. Integrated contribution templates
-5. Documentation build instructions
-6. Real-world use case examples
-7. Combined support channels section
-
-To complete setup:
-1. Create `CONTRIBUTING.md` with contribution guidelines
-2. Add issue templates for bugs/features
-3. Set up GitHub Pages for documentation
-4. Add sample datasets to `data/` directory
-5. Configure ReadTheDocs integration
