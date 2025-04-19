@@ -11,7 +11,7 @@ A Python package for robust Photoplethysmography (PPG) signal processing, specif
 - [Features](#features)
 - [Usage](#usage)
   - [Initial setup](#installation)
-  - [Quick start](#quick start)
+  - [Quick start](#https://vscode.dev/github/IlyaKarakulin/stress-level-by-PPG/blob/main/README.md#L50)
 - [Processing Workflow](#Processing Workflow)
 - [Projects using this template](#projects-using-this-template)
 - [FAQ](#faq)
