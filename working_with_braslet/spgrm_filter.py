@@ -18,15 +18,15 @@ class SpgrmFilter:
         self.window_size=window_size
 
 
-    def filter(self, ppg_md):
+    def apply_filter(self, ppg_md):
         ppg_filt = self.__bandpass_filter(ppg_md, 0.8, 4, self.ppg_fr)
-        adapt_ppg = self.__adaptive_normalization(ppg_filt, 256)
+        adapt_ppg = self.__adaptive_normalization(ppg_filt)
 
         wight = len(adapt_ppg) / 512
         img = self.__spgrm(adapt_ppg)
         out = self.__conv(img)
         mean_fr = self.__compute_windowed_mean(out)
-        mask = self.__create_mask(4, 64, mean_fr, len(adapt_ppg))
+        mask = self.__create_mask()
         filt_ppg = adapt_ppg.copy()
         filt_ppg[~mask] = 0
         
@@ -41,17 +41,17 @@ class SpgrmFilter:
         return signal.filtfilt(b, a, data)
     
 
-    def __adaptive_normalization(self, signal):
-        normalized = np.zeros_like(signal)
+    def __adaptive_normalization(self, data):
+        normalized = np.zeros_like(data)
 
-        for i in range(len(signal)):
+        for i in range(len(data)):
             start = max(0, i - self.window_size // 2)
-            end = min(len(signal), i + self.window_size // 2)
+            end = min(len(data), i + self.window_size // 2)
 
-            local_mean = np.mean(signal[start:end])
-            local_std = np.std(signal[start:end])
+            local_mean = np.mean(data[start:end])
+            local_std = np.std(data[start:end])
 
-            normalized[i] = (signal[i] - local_mean) / local_std
+            normalized[i] = (data[i] - local_mean) / local_std
             
         return normalized
     
