@@ -45,6 +45,8 @@ git clone https://github.com/IlyaKarakulin/stress-level-by-PPG.git
 cd stress-level-by-PPG
 pip install -r requirements.txt
 
+```
+
 ### Quick start
 
 ## Processing Workflow
