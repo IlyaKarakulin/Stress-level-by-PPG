@@ -68,7 +68,7 @@ visualize(raw_signal, clean_signal)
 ```
 
 ### Advanced Features
-```python
+
 # Batch processing
 from ppg_processing import BatchProcessor
 
@@ -83,7 +83,7 @@ from ppg_processing import QualityAnalyzer
 
 report = QualityAnalyzer().generate_full_report(clean_signal)
 print(f"Signal Quality Index: {report['sqi']}")
-```
+
 
 ```markdown
 # PPG Signal Processing Toolkit
