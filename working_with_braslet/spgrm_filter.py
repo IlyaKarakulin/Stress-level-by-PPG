@@ -9,24 +9,20 @@ import torch
 from scipy.interpolate import interp1d
 
 class SpgrmFilter:
-    def __init__(self, ppg_fr, in_signal, len_ppg, min_amplitude=4, min_len_interval=64, window_size=256):
-        self.ppg_fr = ppg_fr
-        self.in_signal=in_signal
-        self.len_ppg=len_ppg
-        self.min_amplitude=min_amplitude
-        self.min_len_interval=min_len_interval
-        self.window_size=window_size
+    def __init__(self):
+        pass
+        
 
 
-    def apply_filter(self, ppg_md):
-        ppg_filt = self.__bandpass_filter(ppg_md, 0.8, 4, self.ppg_fr)
-        adapt_ppg = self.__adaptive_normalization(ppg_filt)
+    def apply_filter(self, ppg_md, ppg_fr, len_ppg, min_amplitude=4, min_len_interval=64, window_size=256):
+        ppg_filt = self.__bandpass_filter(ppg_md, 0.8, 4, ppg_fr)
+        adapt_ppg = self.__adaptive_normalization(ppg_filt, window_size)
 
-        wight = len(adapt_ppg) / 512
+        #wight = len(adapt_ppg) / 512
         img = self.__spgrm(adapt_ppg)
         out = self.__conv(img)
         mean_fr = self.__compute_windowed_mean(out)
-        mask = self.__create_mask()
+        mask = self.__create_mask(min_amplitude, min_len_interval, mean_fr, len_ppg)
         filt_ppg = adapt_ppg.copy()
         filt_ppg[~mask] = 0
         
@@ -41,12 +37,12 @@ class SpgrmFilter:
         return signal.filtfilt(b, a, data)
     
 
-    def __adaptive_normalization(self, data):
+    def __adaptive_normalization(self, data, window_size):
         normalized = np.zeros_like(data)
 
         for i in range(len(data)):
-            start = max(0, i - self.window_size // 2)
-            end = min(len(data), i + self.window_size // 2)
+            start = max(0, i - window_size // 2)
+            end = min(len(data), i + window_size // 2)
 
             local_mean = np.mean(data[start:end])
             local_std = np.std(data[start:end])
@@ -99,8 +95,8 @@ class SpgrmFilter:
 
         return activate
     
-    def __create_mask(self):
-        valid = (self.in_signal >= self.min_amplitude)
+    def __create_mask(self, min_amplitude, min_len_interval, in_signal, len_ppg):
+        valid = (in_signal >= min_amplitude)
         
         diff = np.diff(valid.astype(int))
         starts = np.where(diff == 1)[0] + 1
@@ -113,7 +109,7 @@ class SpgrmFilter:
         
         intervals = []
         for s, e in zip(starts, ends):
-            if e - s >= self.min_len_interval:
+            if e - s >= min_len_interval:
                 intervals.append((s, e))
         
         time_mask = np.zeros_like(valid, dtype=bool)
@@ -121,7 +117,7 @@ class SpgrmFilter:
             time_mask[s:e] = True
 
         indices_mask = np.arange(len(time_mask))
-        indices_ppg = np.linspace(0, len(time_mask)-1, self.len_ppg)
+        indices_ppg = np.linspace(0, len(time_mask)-1, len_ppg)
         
         mask_func = interp1d(
             indices_mask,
