@@ -1,28 +1,22 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import scipy.signal as signal
 import cv2
 from numpy.lib.stride_tricks import sliding_window_view
-import torch.nn as nn
-import torch
 from scipy.interpolate import interp1d
 
 class SpgrmFilter:
     def __init__(self):
         pass
         
-
-
-    def apply_filter(self, ppg_md, ppg_fr, len_ppg, min_amplitude=4, min_len_interval=64, window_size=256):
-        ppg_filt = self.__bandpass_filter(ppg_md, 0.8, 4, ppg_fr)
+    def filter(self, ppg, ppg_fr, min_amplitude=4, min_len_interval=64, window_size=256):
+        ppg_filt = self.__bandpass_filter(ppg, 0.8, 4, ppg_fr)
         adapt_ppg = self.__adaptive_normalization(ppg_filt, window_size)
 
         #wight = len(adapt_ppg) / 512
         img = self.__spgrm(adapt_ppg)
         out = self.__conv(img)
         mean_fr = self.__compute_windowed_mean(out)
-        mask = self.__create_mask(min_amplitude, min_len_interval, mean_fr, len_ppg)
+        mask = self.__create_mask(min_amplitude, min_len_interval, mean_fr, len(ppg))
         filt_ppg = adapt_ppg.copy()
         filt_ppg[~mask] = 0
         
@@ -68,8 +62,6 @@ class SpgrmFilter:
 
     def __spgrm(self, ppg, min_fr=0, max_fr=3):
         frequencies, _, Zxx = signal.stft(ppg, fs=256, window='hann', nperseg=1024, noverlap=1000)
-
-        # log_spectrogram = 20 * np.log10(np.abs(Zxx) + 1e-10)
         log_spectrogram = np.abs(Zxx)
         freq_mask = (frequencies >= min_fr) & (frequencies <= max_fr)
         img = self.__norm_spgrm(log_spectrogram[freq_mask, : ])
@@ -79,20 +71,14 @@ class SpgrmFilter:
     def __conv(self, img):
         kernel_row = np.array(
             [[-1, -1, -1, -1, -1, -1, -1, -1, -1],
-            # [-1, -1, -1, -1, -1, -1, -1, -1, -1],
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            # [1, 1, 1, 1, 1, 1, 1, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-        dtype=np.float32)
-
-        conv1 = cv2.filter2D(img, -1, kernel_row)
-        # conv2 = cv2.filter2D(conv1, -1, kernel_row)
-
-        # relu = nn.ReLU()
-        gelu = nn.GELU()
-        activate = gelu(torch.Tensor(conv1))
-        # activate = np.log10(relu(torch.Tensor(conv1)) + 1)
-
+            dtype=np.float32
+        )
+        img_float = img.astype(np.float32)
+        conv1 = cv2.filter2D(img_float, -1, kernel_row)
+        activate = np.maximum(conv1, 0)
+        
         return activate
     
     def __create_mask(self, min_amplitude, min_len_interval, in_signal, len_ppg):
