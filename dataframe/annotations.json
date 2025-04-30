@@ -1,0 +1,50 @@
+[
+    {
+        "file_path": "test_stroop.csv",
+        "annotations": [
+            {"start": 0, "end": 120, "label": 1},
+            {"start": 160, "end": 300, "label": 3}
+        ]
+    },
+    {
+        "file_path": "test_cold.csv",
+        "annotations": [
+            {"start": 0, "end": 120, "label": 1},
+            {"start": 120, "end": 180, "label": 4}
+        ]
+    },
+    {
+        "file_path": "test_video_1.csv",
+        "annotations": [
+            {"start": 0, "end": 60, "label": 1},
+            {"start": 120, "end": 360, "label": 4}
+        ]
+    },
+    {
+        "file_path": "test_movie_2.csv",
+        "annotations": [
+            {"start": 0, "end": 900, "label": 1},
+            {"start": 961, "end": 1500, "label": 2},
+            {"start": 1500, "end": 1700, "label": 3},
+            {"start": 1700, "end": 1880, "label": 4},
+            {"start": 1960, "end": 2638, "label": 5}
+        ]
+    },
+    {
+        "file_path": "test_physical_activity_1.csv",
+        "annotations": [
+            {"start": 0, "end": 60, "label": 1},
+            {"start": 90, "end": 210, "label": 3},
+            {"start": 210, "end": 390, "label": 4}
+
+        ]
+    },
+    {
+        "file_path": "test_physical_activity_2.csv",
+        "annotations": [
+            {"start": 0, "end": 60, "label": 4},
+            {"start": 90, "end": 360, "label": 3}
+        ]
+    }
+
+]
