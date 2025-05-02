@@ -8,8 +8,11 @@ class PPGDatasetBulder:
 
 
     def add_segment(self, signal, start_sec, end_sec, label):
-        start_idx = int(start_sec * self.ppg_fr)
-        end_idx = int(end_sec * self.ppg_fr)
+        # start_idx = int(start_sec * self.ppg_fr)
+        # end_idx = int(end_sec * self.ppg_fr)
+
+        start_idx = int(start_sec * len(signal))
+        end_idx = int(end_sec * len(signal))
 
         # if start_idx >= len(signal) or end_idx > len(signal):
         #     raise ValueError("Incorrect time points!")
