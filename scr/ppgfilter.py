@@ -4,7 +4,7 @@ import cv2
 from numpy.lib.stride_tricks import sliding_window_view
 from scipy.interpolate import interp1d
 
-class SpgrmFilter:
+class PPGFilter:
     def __init__(self):
         pass
         
@@ -12,7 +12,6 @@ class SpgrmFilter:
         ppg_filt = self.__bandpass_filter(ppg, 0.8, 4, ppg_fr)
         adapt_ppg = self.__adaptive_normalization(ppg_filt, window_size)
 
-        #wight = len(adapt_ppg) / 512
         img = self.__spgrm(adapt_ppg)
         out = self.__conv(img)
         mean_fr = self.__compute_windowed_mean(out)
