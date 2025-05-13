@@ -30,7 +30,7 @@ class StressIndex:
 
         return feature_vector
 
-    def __calc_feature(self, ppg, fr_ppg, wind_size_in_sec=45, step_in_sec=5):
+    def __calc_feature(self, ppg, fr_ppg, wind_size_in_sec, step_in_sec=5):
         feature_list = []
         window_size = int(wind_size_in_sec * fr_ppg)
         step = int(step_in_sec * fr_ppg)
@@ -45,6 +45,6 @@ class StressIndex:
 
         return pd.DataFrame(feature_list, columns=self.feature)
 
-    def predict(self, ppg, fr_ppg):
-        data = self.__calc_feature(ppg, fr_ppg)
+    def predict(self, ppg, fr_ppg, wind_size_in_sec=45):
+        data = self.__calc_feature(ppg, fr_ppg, wind_size_in_sec)
         return self.model.predict(data)
