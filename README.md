@@ -2,7 +2,6 @@
 
 ![](images/main.png)
 
-
 The SLBPPG framework provides tools for processing the PPG signal.
 
 ## Installation
@@ -25,5 +24,5 @@ pip install SLBPPG==0.1
 **Returns**: \
 &nbsp;&nbsp;&nbsp;&nbsp;Itress index (on a five-point scale) for each window, duration 1 minute, by default
 
->You can view the usage example and learn more about the methods in the [file](.demo/example.ipynb)
+>You can view the usage example and learn more about the methods in the [file](https://github.com/IlyaKarakulin/Stress-level-by-PPG/blob/main/demo/example.ipynb)
 
