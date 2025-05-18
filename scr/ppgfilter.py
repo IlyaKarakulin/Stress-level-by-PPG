@@ -9,8 +9,8 @@ class PPGFilter:
     def __init__(self):
         pass
         
-    def filter(self, ppg, ppg_fr, min_amplitude=3, min_len_interval=64, window_size=256):
-        ppg_filt = self.__bandpass_filter(ppg, 0.8, 4, ppg_fr)
+    def filter(self, ppg, ppg_fr, min_amplitude=3, min_len_interval=64, min_fr = 0.8, max_fr = 2.5, window_size=256):
+        ppg_filt = self.__bandpass_filter(ppg, min_fr, max_fr, ppg_fr)
         adapt_ppg = self.__adaptive_normalization(ppg_filt, window_size)
 
         img = self.__spgrm(adapt_ppg)

@@ -2,13 +2,13 @@
 
 The SLBPPG framework provides tools for processing the PPG signal.
 
-# Installation
+## Installation
 
 ```bash
 pip install SLBPPG==0.1
 ```
 
-# Methods
+## Methods
 
 - **SLBPPG.filter(ppg, ppg_fr)** \
 **Input**: \
