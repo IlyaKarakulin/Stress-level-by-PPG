@@ -1,5 +1,8 @@
 # PPG Signal Processing Toolkit
 
+![](images/main.png)
+
+
 The SLBPPG framework provides tools for processing the PPG signal.
 
 ## Installation
